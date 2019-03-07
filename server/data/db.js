@@ -51,12 +51,14 @@ class Database {
         let end = start+pageSize;
 
         // 需要返回的数据集
-        let data = this.table.filter(x=>keyword?x.indexOf(keyword)!=-1:true).slice(start,end>this.table.length?this.table.length:end);
+        let data = this.table
+                        .filter(x=>keyword?(x.keywords||'').indexOf(keyword)!=-1:true)
+                        .slice(start,end>this.table.length?this.table.length:end);
         
         // 分页返回模型
         return {
             pageIndex:pageIndex,
-            pageSIze:pageSIze,
+            pageSIze:pageSize,
             totalCount:this.table.length,
             data:data
         };
@@ -78,7 +80,9 @@ class Database {
         for(let entity of this.table){
             if(entity.id==id){
                 for(let key in obj){
-                    entity[key] = obj[key];
+                    if(key!='id'){
+                        entity[key] = obj[key];
+                    }
                 }
             }
         }
