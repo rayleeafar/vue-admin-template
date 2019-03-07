@@ -1,12 +1,15 @@
 const apis = {
-    login:'/login',
-    logout:'/logout',
+    login:'/auth/login',
+    logout:'/auth/logout',
     userManage:{
         add:'/user/add',
-        delete:'/user/delete',
-        edit:'user/edit',
-        detail:'user/detail'
+        delete:'/user/remove',
+        edit:'/user/update',
+        list:'/user/getpagelist'
     },
+    menuManager:{
+        list:'/menu/list'
+    }
     // ...
 }
 

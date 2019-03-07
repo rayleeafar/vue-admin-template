@@ -91,21 +91,23 @@ export default {
             params: this.loginForm
           });
           if (res) {
-            alert(res);
-            storage.set("token", res.token);
-            storage.set("refresh_token", res.refreshToken);
-            // todo: 获取菜单、获取当前登录用户的权限和身份等
-            this.$router.push({ name: "Hello" });
-          } else {
-            this.$message({
-              type: "error",
-              message: "登录错误"
+            storage.set("token", res.data);
+            let menus = await this.$ajax({
+              url: apis.menuManager.list,
+              type: "GET"
             });
+            if (menus.data.length > 0) {
+              storage.set("menus", JSON.stringify(menus.data));
+            }
+
+            this.$message({
+              message: "登录成功"
+            });
+            window.setTimeout(()=>{
+              this.$router.push({ name: "Hello" });
+            },1000);
           }
         }
-      });
-      this.$message({
-        message: "hello"
       });
     }
   }
