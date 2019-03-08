@@ -65,8 +65,8 @@
 
 <script>
 import apis from "../server/apis";
-import userStorage from "../storages/userStorage";
-import menuStorage from "../storages/menuStorage";
+import userStorage from '../utils/storages/userStorage';
+import menuStorage from "../utils/storages/menuStorage";
 
 export default {
   name: "Login",

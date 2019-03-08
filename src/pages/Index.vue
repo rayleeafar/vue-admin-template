@@ -8,7 +8,7 @@
       </el-col>
       <el-col :span="20">
         <section class="top-status-bar">
-          <TopStatusBar :username="userName" @onlogout="logout"></TopStatusBar>
+          <TopStatusBar :username="userName" @logout="logout"></TopStatusBar>
         </section>
         <section class="content">
           <!-- 所有属于Index子路由的页面都会在下面的router-view中渲染 -->
@@ -38,8 +38,8 @@
 <script>
 import Menus from "../components/menus";
 import TopStatusBar from "../components/topStatusBar";
-import userStorage from "../storages/userStorage";
-import menuStorage from "../storages/menuStorage";
+import userStorage from "../utils/storages/userStorage";
+import menuStorage from "../utils/storages/menuStorage";
 import apis from "../server/apis";
 
 export default {
