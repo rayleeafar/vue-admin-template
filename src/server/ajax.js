@@ -49,7 +49,7 @@ const ajax = function (options) {
                     });
                     reject(res.data);
                 }
-            }, err => {
+            }).catch(err => {
                 // 获得请求响应的时候关闭loading
                 if (load) {
                     load.close();
@@ -67,13 +67,13 @@ const ajax = function (options) {
                 } else {
                     // 其他的错误 弹出详细的错误原因
                     this.$message({
-                        message: err.data.err || "未知错误",
+                        message: err.data || "未知错误",
                         type: 'warning',
                         duration: 1500
                     });
                 }
-                reject(err.data);
-            })
+                reject(err);
+            });
     })
 }
 

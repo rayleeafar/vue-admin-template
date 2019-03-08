@@ -13,7 +13,12 @@
             <el-input type="password" v-model="loginForm.password" placeholder="密码"></el-input>
           </el-form-item>
           <el-form-item class="submit-section">
-            <el-button type="primary" @click="submitForm('loginForm')" class="btn-login">登录</el-button>
+            <el-button
+              type="primary"
+              :loading="btnLoading"
+              @click="submitForm('loginForm')"
+              class="btn-login"
+            >登录</el-button>
           </el-form-item>
         </el-form>
       </section>
@@ -60,7 +65,9 @@
 
 <script>
 import apis from "../server/apis";
-import storage from "../utils/storage";
+import tokenService from "../services/tokenService";
+import menuService from "../services/menuService";
+
 export default {
   name: "Login",
   data() {
@@ -75,8 +82,16 @@ export default {
         ],
         password: [{ required: true, message: "请输入密码", trigger: "blur" }]
       },
-      isShowForm: false
+      isShowForm: false,
+      btnLoading: false
     };
+  },
+  async created() {
+    let token = tokenService.get();
+    if (token) {
+        console.log('您已经登录，即将跳转到首页');
+        this.redirectToHome();
+      }
   },
   mounted: function() {
     this.isShowForm = true;
@@ -85,30 +100,51 @@ export default {
     async submitForm(formName) {
       this.$refs[formName].validate(async valid => {
         if (valid) {
-          let res = await this.$ajax({
-            url: apis.login,
-            type: "POST",
-            params: this.loginForm
-          });
-          if (res) {
-            storage.set("token", res.data);
+          this.changeBtnLoadingState();
+          try {
+            // 登录并设置token
+            let token = await this.$ajax({
+              url: apis.login,
+              type: "POST",
+              params: this.loginForm
+            });
+            tokenService.set(token.data);
+
+            // 获取菜单
             let menus = await this.$ajax({
               url: apis.menuManager.list,
               type: "GET"
             });
             if (menus.data.length > 0) {
-              storage.set("menus", JSON.stringify(menus.data));
+              menuService.set(menus.data);
             }
 
+            // 提示登录成功并在1s后跳转
             this.$message({
               message: "登录成功"
             });
-            window.setTimeout(()=>{
-              this.$router.push({ name: "Hello" });
-            },1000);
+
+            window.setTimeout(() => {
+              this.redirectToHome();
+            }, 1000);
+          } catch (err) {
+            console.log(err);
+            this.$message({
+              message: err,
+              type: "error"
+            });
+          } finally {
+            this.changeBtnLoadingState();
           }
         }
       });
+    },
+    // 改变登录按钮的loading状态
+    changeBtnLoadingState() {
+      this.btnLoading = !this.btnLoading;
+    },
+    redirectToHome(){
+      this.$router.push({ name: 'Hello' });
     }
   }
 };

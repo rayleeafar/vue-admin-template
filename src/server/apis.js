@@ -1,6 +1,7 @@
 const apis = {
     login:'/auth/login',
     logout:'/auth/logout',
+    checkToken:'/auth/checktoken',
     userManage:{
         add:'/user/add',
         delete:'/user/remove',
