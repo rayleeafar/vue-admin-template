@@ -6,7 +6,6 @@ let menus = [
     { id: '5', name: '菜单列表', path: '/menu/list', parentId: 4, order: 5 },
     { id: '6', name: '一级菜单', path: '/hello', parentId: 0, order: 6 },
     { id: '7', name: '二级菜单', path: '/hello', parentId: 6, order: 7 },
-    { id: '8', name: '三级菜单', path: '/hello', parentId: 7, order: 8 }
 ];
 
 module.exports = menus;

@@ -65,8 +65,8 @@
 
 <script>
 import apis from "../server/apis";
-import tokenService from "../services/tokenService";
-import menuService from "../services/menuService";
+import userStorage from "../storages/userStorage";
+import menuStorage from "../storages/menuStorage";
 
 export default {
   name: "Login",
@@ -87,11 +87,11 @@ export default {
     };
   },
   async created() {
-    let token = tokenService.get();
+    let token = userStorage.getToken();
     if (token) {
-        console.log('您已经登录，即将跳转到首页');
-        this.redirectToHome();
-      }
+      console.log("您已经登录，即将跳转到首页");
+      this.redirectToHome();
+    }
   },
   mounted: function() {
     this.isShowForm = true;
@@ -108,7 +108,8 @@ export default {
               type: "POST",
               params: this.loginForm
             });
-            tokenService.set(token.data);
+            userStorage.setToken(token.data);
+            userStorage.setUser({ userName: this.loginForm.userName });
 
             // 获取菜单
             let menus = await this.$ajax({
@@ -116,7 +117,7 @@ export default {
               type: "GET"
             });
             if (menus.data.length > 0) {
-              menuService.set(menus.data);
+              menuStorage.set(menus.data);
             }
 
             // 提示登录成功并在1s后跳转
@@ -129,10 +130,6 @@ export default {
             }, 1000);
           } catch (err) {
             console.log(err);
-            this.$message({
-              message: err,
-              type: "error"
-            });
           } finally {
             this.changeBtnLoadingState();
           }
@@ -143,8 +140,8 @@ export default {
     changeBtnLoadingState() {
       this.btnLoading = !this.btnLoading;
     },
-    redirectToHome(){
-      this.$router.push({ name: 'Hello' });
+    redirectToHome() {
+      this.$router.push({ name: "Hello" });
     }
   }
 };

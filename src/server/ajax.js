@@ -44,10 +44,10 @@ const ajax = function (options) {
                 } else {
                     this.$message({
                         message: res.data.err || "未知错误",
-                        type: 'warning',
+                        type: 'error',
                         duration: 1500
                     });
-                    reject(res.data);
+                    reject(res.data.err);
                 }
             }).catch(err => {
                 // 获得请求响应的时候关闭loading
@@ -67,12 +67,12 @@ const ajax = function (options) {
                 } else {
                     // 其他的错误 弹出详细的错误原因
                     this.$message({
-                        message: err.data || "未知错误",
-                        type: 'warning',
+                        message: err.response.data.err || "未知错误",
+                        type: 'error',
                         duration: 1500
                     });
                 }
-                reject(err);
+                reject(err.response.data.err);
             });
     })
 }

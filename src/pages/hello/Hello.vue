@@ -1,6 +1,9 @@
 <template>
-    <h1>hello</h1>
+    <div>
+        <h1>WELCOME</h1>
+    </div>
 </template>
+
 
 <script>
 export default {
@@ -8,3 +11,6 @@ export default {
 }
 </script>
 
+<style>
+
+</style>
