@@ -2,7 +2,7 @@
   <div class="container">
     <el-row>
       <el-col :span="4">
-        <section class="menu">
+        <section class="menus">
           <Menus></Menus>
         </section>
       </el-col>
@@ -20,8 +20,10 @@
 </template>
 
 <style>
-.menu{
+.menus {
   height: 100vh;
+  overflow-x: hidden;
+  background-color: #545c64;
 }
 .top-status-bar {
   padding: 20px;
@@ -47,16 +49,24 @@ export default {
   components: { Menus, TopStatusBar },
   methods: {
     async logout() {
-      await this.$ajax({
-        url: apis.logout,
-        type: "POST"
-      });
+      // 清除用户浏览器凭证
       userStorage.removeToken();
       userStorage.removeUser();
       menuStorage.remove();
+
       this.$message({
         message: "您已安全退出"
       });
+      // 调用服务器的退出登录接口，忽略错误
+      try {
+        await this.$ajax({
+          url: apis.logout,
+          type: "POST",
+          showErr: false
+        });
+      } catch (err) {
+        console.log(err);
+      }
       setTimeout(() => {
         this.redirectToLogin();
       }, 1500);
@@ -70,11 +80,8 @@ export default {
   },
   data() {
     return {
-      userName: ''
+      userName: ""
     };
   }
 };
 </script>
-
-<style>
-</style>

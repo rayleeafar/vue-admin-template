@@ -1,22 +1,32 @@
 <template>
-    <div class="container">
-        <section class="bread">
-        </section>
-        <section class="control">
-            <span>欢迎您，{{username}}</span>
-            <button @click="logout">安全退出</button>
-        </section>
-    </div>
+  <div class="container">
+    <section class="breadcrumb">
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item :to="{ name: 'Hello' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item v-for="(item, index) in $route.meta.navBar" :key="index">{{item}}</el-breadcrumb-item>
+      </el-breadcrumb>
+    </section>
+    <section class="control">
+      <span>欢迎您，{{username}}</span>
+      <button @click="logout">安全退出</button>
+    </section>
+  </div>
 </template>
 
+<style scoped>
+    .container{
+        display:flex;
+        justify-content: space-between;
+    }
+</style>
 <script>
 export default {
-    name:'TopStatusBar',
-    methods:{
-        logout(){
-            this.$emit('logout',this);
-        }
-    },
-    props:['username']
-}
+  name: "TopStatusBar",
+  methods: {
+    logout() {
+      this.$emit("logout", this);
+    }
+  },
+  props: ["username"]
+};
 </script>

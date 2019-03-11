@@ -3,7 +3,7 @@ import storage from '../utils/storage';
 
 const ajax = function (options) {
     // 结构参数
-    let { url, params = null, type = "GET", loading = true, sendToken = true } = options;
+    let { url, params = null, type = "GET", loading = true, sendToken = true, showErr = true } = options;
 
     // loading句柄
     let load = null;
@@ -42,11 +42,13 @@ const ajax = function (options) {
                 if (res.status >= 200 && res.status < 400 && res.data.succ) {
                     resolve(res.data);
                 } else {
-                    this.$message({
-                        message: res.data.err || "未知错误",
-                        type: 'error',
-                        duration: 1500
-                    });
+                    if (showErr) {
+                        this.$message({
+                            message: res.data.err || "未知错误",
+                            type: 'error',
+                            duration: 1500
+                        });
+                    }
                     reject(res.data.err);
                 }
             }).catch(err => {
@@ -55,24 +57,28 @@ const ajax = function (options) {
                     load.close();
                 }
                 // 401状态码跳转到登录页
-                if (err.status === 401) {
-                    this.$message({
-                        message: '你还没有登录或者登录已过期',
-                        type: 'error',
-                        duration: 1500
-                    });
+                if (err.response.status == 401) {
+                    if (showErr) {
+                        this.$message({
+                            message: '你还没有登录或者登录已过期',
+                            type: 'error',
+                            duration: 1500
+                        });
+                    }
                     this.$router.push({
                         name: 'Login'
                     });
                 } else {
                     // 其他的错误 弹出详细的错误原因
-                    this.$message({
-                        message: err.response.data.err || "未知错误",
-                        type: 'error',
-                        duration: 1500
-                    });
+                    if (showErr) {
+                        this.$message({
+                            message: err.response.data.err || "未知错误",
+                            type: 'error',
+                            duration: 1500
+                        });
+                    }
+                    reject(err.response.data.err);
                 }
-                reject(err.response.data.err);
             });
     })
 }
