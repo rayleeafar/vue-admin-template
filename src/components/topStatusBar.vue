@@ -18,6 +18,19 @@
         display:flex;
         justify-content: space-between;
     }
+    .control >span{
+      font-size: 16px;
+    }
+    .control > button{
+      border: 0;
+      outline: 0;
+      transition: color .3s;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .control > button:hover{
+      color: gray;
+    }
 </style>
 <script>
 export default {
