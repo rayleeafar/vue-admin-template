@@ -12,7 +12,14 @@
         </section>
         <section class="content">
           <!-- 所有属于Index子路由的页面都会在下面的router-view中渲染 -->
-          <router-view></router-view>
+          <template v-if="$route.meta.keepAlive">
+            <keep-alive>
+              <router-view></router-view>
+            </keep-alive>
+          </template>
+          <template v-else>
+            <router-view></router-view>
+          </template>
         </section>
       </el-col>
     </el-row>
@@ -72,7 +79,7 @@ export default {
       }, 1500);
     },
     redirectToLogin() {
-      this.$router.push({ name: "Login" });
+      this.$router.push({ name: "login" });
     }
   },
   created() {

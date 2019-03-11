@@ -66,7 +66,7 @@ const ajax = function (options) {
                         });
                     }
                     this.$router.push({
-                        name: 'Login'
+                        name: 'login'
                     });
                 } else {
                     // 其他的错误 弹出详细的错误原因

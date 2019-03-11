@@ -141,7 +141,7 @@ export default {
       this.btnLoading = !this.btnLoading;
     },
     redirectToHome() {
-      this.$router.push({ name: "Hello" });
+      this.$router.push({ name: "hello" });
     }
   }
 };
