@@ -4,7 +4,7 @@ const apis = {
     checkToken:'/auth/checktoken',
     userManage:{
         add:'/user/add',
-        delete:'/user/remove',
+        delete:'/user/delete',
         edit:'/user/update',
         list:'/user/list'
     },

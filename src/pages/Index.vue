@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <el-row>
-      <el-col :span="4">
+      <el-col :span="4" class="menu-wrapper">
         <section class="menus">
           <Menus></Menus>
         </section>
@@ -26,7 +26,8 @@
   </div>
 </template>
 
-<style>
+<style scoped>
+
 .menus {
   height: 100vh;
   overflow-x: hidden;
@@ -38,7 +39,7 @@
 .content {
   width: 99%;
   padding: 10px;
-  overflow: hidden;
+  overflow: auto;
   border-top: 1px solid skyblue;
 }
 </style>

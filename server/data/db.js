@@ -50,16 +50,18 @@ class Database {
         // 结束索引
         let end = start+pageSize;
 
+        // 符合条件的记录总数
+        let rows = this.table
+        .filter(x=>keyword?(x.keyword).indexOf(keyword)!=-1:true);
+        
         // 需要返回的数据集
-        let data = this.table
-                        .filter(x=>keyword?(x.keyword).indexOf(keyword)!=-1:true)
-                        .slice(start,end>this.table.length?this.table.length:end);
+        let data = rows.slice(start,end>this.table.length?this.table.length:end);
         
         // 分页返回模型
         return {
             pageIndex:Number(pageIndex),
             pageSize:Number(pageSize),
-            totalCount:data.length,
+            totalCount:rows.length,
             data:data
         };
     }
