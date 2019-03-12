@@ -11,8 +11,6 @@ router.use('*', async (ctx,next)=>{
     // 登录和检查token是否有效的接口不需要鉴权
     let ignores = ['/auth/login','/auth/checktoken'];
     let path=ctx.request.path.toLowerCase();
-
-    console.log(`${new Date().toLocaleString()}请求：${path},body:${JSON.stringify(ctx.request.body)},query:${JSON.stringify(ctx.request.query)}`);
     if(ignores.indexOf(path)!=-1){
         await next();
     }else{

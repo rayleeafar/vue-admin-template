@@ -4,6 +4,7 @@ const bodyParser =require('koa-bodyparser');
 const cors = require('koa2-cors');
 const globalException = require('./middlewares/globalExceptionMiddleware');
 const config = require('./config');
+const log = require('./middlewares/logMiddleware');
 
 let app = new koa();
 
@@ -15,7 +16,7 @@ app.use(cors());
 
 // 全局异常捕获
 app.use(globalException());
-
+app.use(log());
 // 绑定路由
 app.use(router.routes());
 
