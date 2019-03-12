@@ -8,12 +8,4 @@ const opt = {
     timeout: 5000
 };
 const cfg = Axios.create(opt);
-
-// 拦截错误
-cfg.interceptors.response.use(res => {
-    return res;
-}, err => {
-    return Promise.reject(err);
-});
-
 export default cfg;

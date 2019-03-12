@@ -1,3 +1,4 @@
+// 菜单表
 let menus = [
     { id: '2', name: '用户管理', path: '/user', parentId: 0, order: 2 },
     { id: '3', name: '用户列表', path: '/user/list', parentId: 2, order: 3 },

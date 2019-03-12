@@ -4,8 +4,7 @@ import Hello from '../pages/Hello/Hello';
 import UserList from '../pages/User/List';
 
 let routes = [
-
-    // 访问登录路径，渲染登录页面
+    // 直接访问跟地址时，跳转到登录页面，引导登录
     {
         path: '/',
         redirect: 'login'
@@ -16,7 +15,7 @@ let routes = [
         component: Login
     },
     {
-        // Index页是一个骨架页，所有的后台页面都应该是Index的子页
+        // Index页是一个骨架页，所有的后台页面都是Index的子页
         name: 'index',
         path: '/index',
         component: Index,
@@ -26,6 +25,7 @@ let routes = [
                 path:'/user/list',
                 component:UserList,
                 meta:{
+                    // 面包屑数据
                     navBar:['用户管理','用户列表']
                 }
             },

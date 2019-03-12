@@ -1,3 +1,4 @@
+// 日期时间格式化方法
 export default function dateFilter(dt, fmt = 'yyyy-MM-dd hh:mm:ss') {
     let date = new Date(dt);
     var o = {

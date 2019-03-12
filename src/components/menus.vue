@@ -1,27 +1,28 @@
 <template>
+  <!-- 左侧的菜单组件 -->
   <section class="menu-container">
     <el-menu
-         background-color="#545c64"
-         text-color="#fff"
-         active-text-color="#ffd04b"
-         class="menu-list" 
-         :default-active="$route.path" 
-         :router="true">
+      background-color="#545c64"
+      text-color="#fff"
+      active-text-color="#ffd04b"
+      class="menu-list"
+      :default-active="$route.path"
+      :router="true"
+    >
       <el-menu-item index="hello" class="home-item">
         <i class="el-icon-menu"></i>首页
       </el-menu-item>
 
       <el-submenu v-for="(s1,s1Index) of menus" :key="s1.id" :index="String(s1Index)">
         <template slot="title">{{s1.name}}</template>
-        <el-menu-item
-        v-for="s2 of s1.children" :key="s2.id" :index="s2.path?s2.path:''">{{s2.name}}</el-menu-item>
+        <el-menu-item v-for="s2 of s1.children" :key="s2.id" :index="s2.path?s2.path:''">{{s2.name}}</el-menu-item>
       </el-submenu>
     </el-menu>
   </section>
+  <!-- /左侧的菜单组件 -->
 </template>
 
 <style>
-
 </style>
 
 <script>

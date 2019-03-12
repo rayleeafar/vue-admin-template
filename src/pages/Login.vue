@@ -1,4 +1,5 @@
 <template>
+<!-- 登录页 -->
   <div class="container">
     <transition name="ani-fade" mode="in-out">
       <section class="form-wrapper" v-if="isShowForm">
@@ -24,9 +25,10 @@
       </section>
     </transition>
   </div>
+<!-- /登录页 -->
 </template>
 
-<style>
+<style scoped>
 .container {
   height: 100vh;
   width: 100%;
@@ -124,6 +126,7 @@ export default {
               type: "POST",
               params: this.loginForm
             });
+            // 登录成功后存储用户token和用户信息
             userStorage.setToken(token.data);
             userStorage.setUser({ userName: this.loginForm.userName });
 
@@ -132,16 +135,18 @@ export default {
               url: apis.menuManage.list,
               type: "GET"
             });
+            // 存储菜单
             if (menus.data.length > 0) {
               menuStorage.set(menus.data);
             }
 
             // 提示登录成功并在1s后跳转
             this.$message({
-              message: "登录成功"
+              message: "登录成功",
+              center: true
             });
 
-            window.setTimeout(() => {
+            setTimeout(() => {
               this.redirectToHome();
             }, 1000);
           } catch (err) {

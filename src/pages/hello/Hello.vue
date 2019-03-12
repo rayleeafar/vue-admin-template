@@ -1,8 +1,10 @@
 <template>
+<!-- 欢迎页面 -->
   <div class="hello-box">
     <img src="../../assets/logo.png">
     <h1>欢迎使用CMS后台管理系统</h1>
   </div>
+  <!-- /欢迎页面 -->
 </template>
 
 

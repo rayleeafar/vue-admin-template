@@ -1,8 +1,8 @@
 {
   "name": "vue-admin-template",
   "version": "1.0.0",
-  "description": "A Vue.js project",
-  "author": "Rennix",
+  "description": "A template for building admin SPA by Vue-cli & ElementUI",
+  "author": "Rennix09",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",

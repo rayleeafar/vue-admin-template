@@ -6,7 +6,6 @@ let router = new Router();
 
 // 登录 
 router.post('/login', async (ctx, next) => {
-    console.log(ctx.request.body);
     let { userName, password } = ctx.request.body;
     if (userName && password) {
         let token = authService.login({
@@ -28,6 +27,7 @@ router.post('/logout', async (ctx, next) => {
     await next();
 });
 
+// 检查token是否有效
 router.post('/checktoken', async (ctx, next) => {
     let token = ctx.request.headers['x-token'];
     ctx.body = response.success(authService.validateToken(token));

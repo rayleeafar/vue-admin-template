@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import routes from './routes';
 
+// 使用vue-router进行路由管理
 Vue.use(Router);
 
 export default new Router({
