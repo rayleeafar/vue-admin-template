@@ -1,6 +1,7 @@
 import Login from '../pages/Login';
 import Index from '../pages/Index';
 import Hello from '../pages/hello/Hello';
+import UserList from '../pages/user/list';
 
 let routes = [
 
@@ -20,6 +21,14 @@ let routes = [
         path: '/index',
         component: Index,
         children: [
+            {
+                name:'userList',
+                path:'/user/list',
+                component:UserList,
+                meta:{
+                    navBar:['用户管理','用户列表']
+                }
+            },
             {
                 name: 'hello',
                 path: '/hello',

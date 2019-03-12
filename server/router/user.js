@@ -5,7 +5,7 @@ const response =require('../models/response');
 let router = new Router();
 
 router.get('/list', async (ctx, next) => {
-    let {pageIndex,pageSize,keyword} = ctx.request.body;
+    let {pageIndex,pageSize,keyword} = ctx.request.query;
     let data = userService.getPageList({
         pageIndex,
         pageSize,

@@ -52,14 +52,14 @@ class Database {
 
         // 需要返回的数据集
         let data = this.table
-                        .filter(x=>keyword?(x.keywords||'').indexOf(keyword)!=-1:true)
+                        .filter(x=>keyword?(x.keyword).indexOf(keyword)!=-1:true)
                         .slice(start,end>this.table.length?this.table.length:end);
         
         // 分页返回模型
         return {
-            pageIndex:pageIndex,
-            pageSIze:pageSize,
-            totalCount:this.table.length,
+            pageIndex:Number(pageIndex),
+            pageSize:Number(pageSize),
+            totalCount:data.length,
             data:data
         };
     }

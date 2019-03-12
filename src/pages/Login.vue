@@ -113,7 +113,7 @@ export default {
 
             // 获取菜单
             let menus = await this.$ajax({
-              url: apis.menuManager.list,
+              url: apis.menuManage.list,
               type: "GET"
             });
             if (menus.data.length > 0) {

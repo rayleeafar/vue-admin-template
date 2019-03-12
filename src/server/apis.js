@@ -6,9 +6,9 @@ const apis = {
         add:'/user/add',
         delete:'/user/remove',
         edit:'/user/update',
-        list:'/user/getpagelist'
+        list:'/user/list'
     },
-    menuManager:{
+    menuManage:{
         list:'/menu/list'
     }
     // ...

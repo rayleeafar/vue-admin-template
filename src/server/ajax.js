@@ -4,7 +4,6 @@ import storage from '../utils/storage';
 const ajax = function (options) {
     // 结构参数
     let { url, params = null, type = "GET", loading = true, sendToken = true, showErr = true } = options;
-
     // loading句柄
     let load = null;
     // 是否遮罩显示loading
@@ -25,9 +24,11 @@ const ajax = function (options) {
             headers: {},
             params: {}
         };
-        if (type.toLowerCase === 'get') {
+        let isGet =type.toLowerCase() === 'get';
+        if (isGet) {
             requestOptions.params = params;
         }
+        console.log(requestOptions);
         // 是否携带token
         if (sendToken) {
             requestOptions.headers['x-token'] = storage.get('token');
