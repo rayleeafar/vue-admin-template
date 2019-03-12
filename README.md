@@ -1,30 +1,51 @@
 # vue-admin-template
 
-> A Vue.js project
+## Introduction
+> Template project covers common functions such as login authentication, local storage, routing control and data interaction. If you are planning to build a background management system using Vue-related technology stack, this template may help you. If you don't want to build it from scratch, you can download the template completely without any configuration, and then you can open it. Start writing your own business code.
 
-## Build Setup
+The project includes both the server (using koa2) and the client. After you cloned the code, you just need to run both the server and the client at the same time. 
+
+## Step 1 Clone 
 
 ``` bash
-# install dependencies
+
+# clone code to local
+git clone https://github.com/Rennix09/vue-admin-template.git
+
+```
+
+## Step2 Run Client
+
+``` bash
+
+cd ./vue-admin-template
+
+# install client-side packages
 npm install
 
-# serve with hot reload at localhost:8080
+# run client
 npm run dev
 
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
 ```
+
+## Step3 Run Server
+
+run a new terminal and [cd] to the code directory.
+
+``` bash
+
+cd ./server
+
+# install server-side package
+npm install
+
+# run server
+node app.js
+
+``` 
+
+## Step4 Completed!
+
+Open your brower and visite to http://localhost:8080
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
