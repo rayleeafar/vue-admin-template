@@ -1,7 +1,7 @@
 # vue-admin-template
 
 ## Introduction
-> Template project covers common functions such as login authentication, local storage, routing control and data interaction. If you are planning to build a background management system using Vue-related technology stack, this template may help you. If you don't want to build it from scratch, you can download the template completely without any configuration, and then you can open it. Start writing your own business code.
+> Template project covers common functions such as login authentication, local storage, routing control and data interaction. If you are planning to build a background management system using Vue-related technology stack, this template may help you. If you don't want to build it from scratch, you can clone the template completely without any configuration, and then you can start writing your own business code.
 
 The project includes both the server (using koa2) and the client. After you cloned the code, you just need to run both the server and the client at the same time. 
 
