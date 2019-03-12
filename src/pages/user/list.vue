@@ -15,7 +15,12 @@
         <el-table-column prop="phone" label="手机号码" width="200"></el-table-column>
         <el-table-column prop="userName" label="用户名" width="200"></el-table-column>
         <el-table-column prop="email" label="邮箱" width="200"></el-table-column>
-        <el-table-column prop="createTime" label="注册时间" width="230"></el-table-column>
+        <el-table-column label="注册时间" width="230">
+          <template slot-scope="scope">
+            <!-- 使用全局日期过滤器格式化日期展示 -->
+            {{scope.row.createTime|date}}
+          </template>
+        </el-table-column>
       </el-table>
     </section>
     <section class="pager">

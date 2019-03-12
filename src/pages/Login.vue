@@ -65,7 +65,7 @@
 
 <script>
 import apis from "../server/apis";
-import userStorage from '../utils/storages/userStorage';
+import userStorage from "../utils/storages/userStorage";
 import menuStorage from "../utils/storages/menuStorage";
 
 export default {
@@ -89,8 +89,24 @@ export default {
   async created() {
     let token = userStorage.getToken();
     if (token) {
-      console.log("您已经登录，即将跳转到首页");
-      this.redirectToHome();
+      try {
+        let isValidToken = (await this.$ajax({
+          url: apis.checkToken,
+          type: "POST",
+          showErr: false
+        })).data;
+        if (isValidToken) {
+          console.log("您已经登录，即将跳转到首页");
+          this.redirectToHome();
+        }
+      } catch (err) {
+        console.log(err);
+      }
+      setTimeout(() => {
+        userStorage.removeToken();
+        userStorage.removeUser();
+        menuStorage.remove();
+      }, 1200);
     }
   },
   mounted: function() {

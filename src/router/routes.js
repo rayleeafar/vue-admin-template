@@ -1,7 +1,7 @@
 import Login from '../pages/Login';
 import Index from '../pages/Index';
-import Hello from '../pages/hello/Hello';
-import UserList from '../pages/user/list';
+import Hello from '../pages/Hello/Hello';
+import UserList from '../pages/User/List';
 
 let routes = [
 

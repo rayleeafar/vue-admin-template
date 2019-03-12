@@ -2,7 +2,7 @@
   <div class="container">
     <section class="breadcrumb">
       <el-breadcrumb separator="/">
-        <el-breadcrumb-item :to="{ name: 'Hello' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ name: 'hello' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item v-for="(item, index) in $route.meta.navBar" :key="index">{{item}}</el-breadcrumb-item>
       </el-breadcrumb>
     </section>
