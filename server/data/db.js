@@ -56,7 +56,7 @@ class TableAccessor {
 
         // 符合条件的记录总数
         let rows = this.table
-            .filter(x => keyword ? (x.keyword).indexOf(keyword) != -1 : true);
+            .filter(x => keyword && x.keyword ? (x.keyword).indexOf(keyword) != -1 : true);
 
         // 需要返回的数据集
         let data = rows.slice(start, end > this.table.length ? this.table.length : end);

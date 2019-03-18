@@ -1,51 +1,51 @@
 <template>
-<!-- 骨架布局页 -->
+  <!-- 骨架布局页 -->
   <div class="container">
-    <el-row>
-      
-      <!-- 第一栏 菜单 -->
-      <el-col :span="4" class="menu-wrapper">
-        <section class="menus">
-          <Menus></Menus>
-        </section>
-      </el-col>
-      <!-- /第一栏 菜单 -->
-      
-      <!-- 第二栏 -->
-      <el-col :span="20">
-        
-        <!-- 顶部面包屑和用户状态 -->
-        <section class="top-status-bar">
-          <TopStatusBar :username="userName" @logout="logout"></TopStatusBar>
-        </section>
-        <!-- /顶部面包屑和用户状态 -->
+    <div class="left">
+      <section class="menus">
+        <Menus></Menus>
+      </section>
+    </div>
 
-        <!-- 各个子页面显示区域 -->
-        <section class="content">
-          <!-- 所有属于Index子路由的页面都会在下面的router-view中渲染 -->
-          <template v-if="$route.meta.keepAlive">
-            <keep-alive>
-              <router-view></router-view>
-            </keep-alive>
-          </template>
-          <template v-else>
+    <div class="right">
+      <!-- 顶部面包屑和用户状态 -->
+      <section class="top-status-bar">
+        <TopStatusBar :username="userName" @logout="logout"></TopStatusBar>
+      </section>
+      <!-- /顶部面包屑和用户状态 -->
+      <!-- 各个子页面显示区域 -->
+      <section class="content">
+        <!-- 所有属于Index子路由的页面都会在下面的router-view中渲染 -->
+        <template v-if="$route.meta.keepAlive">
+          <keep-alive>
             <router-view></router-view>
-          </template>
-        </section>
-        <!-- /各个子页面显示区域 -->
-      </el-col>
-      <!-- /第二栏 -->
-    </el-row>
+          </keep-alive>
+        </template>
+        <template v-else>
+          <router-view></router-view>
+        </template>
+      </section>
+      <!-- /各个子页面显示区域 -->
+    </div>
   </div>
-<!-- /骨架布局页 -->
+  <!-- /骨架布局页 -->
 </template>
 
 <style scoped>
-
-.menus {
+.left {
+  position: fixed;
+  left: 0;
+  top: 0;
   height: 100vh;
+  width: 18%;
+  max-width: 18%;
   overflow-x: hidden;
   background-color: #545c64;
+}
+.right {
+  width: 82%;
+  max-width: 100%;
+  float: right;
 }
 .top-status-bar {
   padding: 20px;
@@ -103,7 +103,7 @@ export default {
   data() {
     return {
       // 当前登录的用户的用户名
-      userName: ''
+      userName: ""
     };
   }
 };

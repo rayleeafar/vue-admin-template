@@ -5,6 +5,7 @@
     <!-- 条件筛选 -->
     <section class="filters">
       <el-row>
+        <el-col :span="18">&nbsp;</el-col>
         <el-col :span="6">
           <el-input placeholder="请输入关键字" v-model="params.keyword">
             <el-button slot="append" icon="el-icon-search" @click="getUsers()"></el-button>
@@ -16,8 +17,8 @@
 
     <!-- 数据表格 -->
     <section class="table-data">
-      <el-button @click="showAddUserDialog()">
-        <i class="el-icon-plus"></i>添加用户
+      <el-button size="mini" @click="showAddUserDialog()" type="primary">
+        添加用户
       </el-button>
       <el-table :data="users">
         <el-table-column prop="id" label="ID" width="100"></el-table-column>
