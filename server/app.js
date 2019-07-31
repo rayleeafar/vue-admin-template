@@ -22,6 +22,6 @@ app.use(router.routes());
 
 // 添加监听
 app.listen(config.port, () => {
-    console.log(`程序已经启动:http://localhost:${config.port}`);
+    console.log(`程序已经启动:http://0.0.0.0:${config.port}`);
 });
 

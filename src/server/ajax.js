@@ -45,7 +45,7 @@ const ajax = function (options) {
 
         // 是否携带token
         if (sendToken) {
-            requestOptions.headers['x-token'] = storage.get('token');
+            requestOptions.headers['Authorization'] = 'Bearer '+storage.get('token');
         }
 
         axios(requestOptions)
@@ -55,7 +55,7 @@ const ajax = function (options) {
                     load.close();
                 }
                 // 200~400并且相应体中的succ=true表示请求成功
-                if (res.status >= 200 && res.status < 400 && res.data.succ) {
+                if (res.status >= 200 && res.status < 400) {
                     resolve(res.data);
                 } else {
                     if (showErr) {
@@ -83,9 +83,10 @@ const ajax = function (options) {
                             center: true
                         });
                     }
-                    this.$router.push({
-                        name: 'login'
-                    });
+                    this.$router.go(0)
+                    // this.$router.push({
+                    //     name: 'login'
+                    // });
                 } else {
                     // 其他的错误 弹出详细的错误原因
                     if (showErr) {

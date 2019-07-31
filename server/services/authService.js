@@ -6,8 +6,8 @@ class AuthService{
     }
     // 登录
     login(model){
-        let {userName,password} = model;
-        let admin = db.admins.searchOne({userName:userName,password:password});
+        let {username,password} = model;
+        let admin = db.admins.searchOne({username:username,password:password});
         if(admin){
             let token = db.tokens.searchOne({userId:admin.id});
             if(token){

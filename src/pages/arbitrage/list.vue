@@ -36,9 +36,10 @@
             <span v-if="scope.row.openPositionSellA=='1'">可开空仓</span>
           </template>
         </el-table-column>
-        <el-table-column prop="profitRange" label="网格范围" width="120">
+        <el-table-column prop="profitRange" label="网格范围" width="180">
           <template slot-scope="scope">
-            <span >{{ scope.row.profitRange.s }}-</span>
+            <span >{{ scope.row.profitRange.s }}</span>
+            <span >-</span>
             <span >{{ scope.row.profitRange.e }}</span>
           </template>
         </el-table-column>
@@ -88,6 +89,9 @@
       width="30%"
     >
       <el-form :model="dialog.form" :rules="dialog.formRules" ref="dialogForm">
+        <el-form-item prop="id" label="DBID:" v-if="false">
+          <el-input type="text" v-model="dialog.form.id" ></el-input>
+        </el-form-item>
         <el-form-item prop="programID" label="程序ID:">
           <el-input type="text" v-model="dialog.form.programID"></el-input>
         </el-form-item>
@@ -163,6 +167,7 @@ export default {
         btnLoading: false, // 提交表单按钮是否loading
         // 添加用户和编辑用户需要用到的表单字段
         form:{
+          id:"",
           programID:"",
           deltaDiff:"",
           leverage:"",
@@ -177,8 +182,8 @@ export default {
         // 表单验证规则
         formRules: {
           programID: [{ required: true, message: "请输入程序ID", trigger: "blur" }],
-          deltaDiff: [{ required: true, message: "请输入偏离值", trigger: "blur" }],
-          leverage: [{ required: true, message: "请输入杠杆倍数", trigger: "blur" }],
+          deltaDiff: [{ pattern: /-{0,1}([1-9].\d*\.{0,1}|0\.|0)\d*[0-9]{0,1}$/,required: true, message: "请输入偏离值", trigger: "blur" }],
+          leverage: [{ pattern: /[1-9]\d*.\d*|0\.\d*[1-9]\d*/,required: true, message: "请输入杠杆倍数", trigger: "blur" }],
           profitRange: [{ required: true, message: "请输入网格范围上下限", trigger: "blur" }]
         }
       }
@@ -191,7 +196,8 @@ export default {
         url: apis.userManage.list,
         type: "GET",
         params: Object.assign({}, this.params)
-      })).data;
+      }));
+
       this.users = list.data;
       this.params.pageIndex = list.pageIndex;
       this.params.pageSize = list.pageSize;

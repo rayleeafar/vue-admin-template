@@ -1,7 +1,7 @@
 import Login from '../pages/Login';
 import Index from '../pages/Index';
-import Hello from '../pages/Hello/Hello';
-import ArbitrageList from '../pages/Arbitrage/List';
+import Hello from '../pages/hello/Hello';
+import ArbitrageList from '../pages/arbitrage/list';
 
 let routes = [
     // 直接访问跟地址时，跳转到登录页面，引导登录

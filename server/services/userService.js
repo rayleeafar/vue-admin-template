@@ -16,8 +16,8 @@ class UserService {
         if (id < 0)
             throw new Error('id不能小于0');
 
-        if (updateFields.userName) {
-            for (let item of db.users.search({ userName: updateFields.userName })) {
+        if (updateFields.username) {
+            for (let item of db.users.search({ username: updateFields.username })) {
                 if (item.id != id) {
                     throw new Error('用户名已存在');
                 }
@@ -36,7 +36,7 @@ class UserService {
 
     // 添加用户
     add(user) {
-        if (db.users.searchOne({ userName: user.userName })!=null) {
+        if (db.users.searchOne({ username: user.username })!=null) {
             throw new Error('用户名已存在');
         }
         db.users.add(user);

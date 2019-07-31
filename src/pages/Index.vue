@@ -10,7 +10,7 @@
     <div class="right">
       <!-- 顶部面包屑和用户状态 -->
       <section class="top-status-bar">
-        <TopStatusBar :username="userName" @logout="logout"></TopStatusBar>
+        <TopStatusBar :username="username" @logout="logout"></TopStatusBar>
       </section>
       <!-- /顶部面包屑和用户状态 -->
       <!-- 各个子页面显示区域 -->
@@ -98,12 +98,12 @@ export default {
     }
   },
   created() {
-    this.userName = userStorage.getUser().userName;
+    this.username = userStorage.getUser().username;
   },
   data() {
     return {
       // 当前登录的用户的用户名
-      userName: ""
+      username: ""
     };
   }
 };

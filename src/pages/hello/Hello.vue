@@ -2,7 +2,9 @@
 <!-- 欢迎页面 -->
   <div class="hello-box">
     <img src="../../assets/logo.png">
-    <h1>欢迎使用CMS后台管理系统</h1>
+    <h2>When I was young , </h2>
+    <h2>  I used to think that money was the most important thing in life , </h2>
+    <h2>  now that I am old , I know it is.</h2>
   </div>
   <!-- /欢迎页面 -->
 </template>

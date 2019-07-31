@@ -11,13 +11,14 @@
             <el-input type="text" v-model="loginForm.username" placeholder="用户名"></el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input type="password" v-model="loginForm.password" placeholder="2FA密码"></el-input>
+            <el-input type="password" v-model="loginForm.password" placeholder="2FA密码" @keyup.enter.native="submitForm('loginForm')"></el-input>
           </el-form-item>
           <el-form-item class="submit-section">
             <el-button
               type="primary"
               :loading="btnLoading"
               @click="submitForm('loginForm')"
+              @keyup.enter.native="submitForm('loginForm')"
               class="btn-login"
             >登录</el-button>
           </el-form-item>
@@ -76,13 +77,11 @@ export default {
     return {
       loginForm: {
         username: "",
-        password: "",
-        otpass: ""
+        password: ""
       },
       rules: {
         username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
         password: [{ required: true, message: "请输入密码", trigger: "blur" }],
-        otpass: [{ required: true, message: "请输入2FA密码", trigger: "blur" }]
       },
       isShowForm: false,
       btnLoading: false
@@ -127,8 +126,9 @@ export default {
               params: this.loginForm
             });
             // 登录成功后存储用户token和用户信息
-            userStorage.setToken(token.data);
-            userStorage.setUser({ userName: this.loginForm.userName });
+            userStorage.setToken(token.access_token);
+
+            userStorage.setUser({ username: this.loginForm.username });
 
             // 获取菜单
             let menus = await this.$ajax({

@@ -18,11 +18,11 @@ router.get('/list', async (ctx, next) => {
 
 // 添加一个新的用户
 router.post('/add', async (ctx, next) => {
-    let { userName, phone, email } = ctx.request.body;
+    let { username, phone, email } = ctx.request.body;
     // 校验参数 
     // ...
     userService.add({
-        userName: userName,
+        username: username,
         phone: phone,
         email: email,
         createTime: Date.now()
@@ -33,13 +33,13 @@ router.post('/add', async (ctx, next) => {
 
 // 更新一个用户 
 router.post('/update', async (ctx, next) => {
-    let { id, userName, phone, email } = ctx.request.body;
+    let { id, username, phone, email } = ctx.request.body;
     // 校验参数 
     // ...
     userService.update(id, {
         email,
         phone,
-        userName
+        username
     });
 
     ctx.body = response.success();

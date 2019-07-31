@@ -23,7 +23,7 @@
       <el-table :data="users">
         <el-table-column prop="id" label="ID" width="100"></el-table-column>
         <el-table-column prop="phone" label="手机号码" width="180"></el-table-column>
-        <el-table-column prop="userName" label="用户名" width="160"></el-table-column>
+        <el-table-column prop="username" label="用户名" width="160"></el-table-column>
         <el-table-column prop="email" label="邮箱" width="180"></el-table-column>
         <el-table-column label="注册时间" width="180">
           <template slot-scope="scope">
@@ -70,8 +70,8 @@
       width="30%"
     >
       <el-form :model="dialog.form" :rules="dialog.formRules" ref="dialogForm">
-        <el-form-item prop="userName" label="用户名">
-          <el-input type="text" v-model="dialog.form.userName"></el-input>
+        <el-form-item prop="username" label="用户名">
+          <el-input type="text" v-model="dialog.form.username"></el-input>
         </el-form-item>
         <el-form-item prop="phone" label="手机号码">
           <el-input type="number" v-model="dialog.form.phone"></el-input>
@@ -123,13 +123,13 @@ export default {
         // 添加用户和编辑用户需要用到的表单字段
         form: { 
           id: "",
-          userName: "",
+          username: "",
           email: "",
           phone: ""
         },
         // 表单验证规则
         formRules: {
-          userName: [
+          username: [
             { required: true, message: "请输入用户名", trigger: "blur" }
           ],
           email: [{ required: true, message: "请输入邮箱", trigger: "blur" }],

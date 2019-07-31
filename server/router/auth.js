@@ -6,10 +6,10 @@ let router = new Router();
 
 // 登录 
 router.post('/login', async (ctx, next) => {
-    let { userName, password } = ctx.request.body;
-    if (userName && password) {
+    let { username, password } = ctx.request.body;
+    if (username && password) {
         let token = authService.login({
-            userName,
+            username,
             password
         });
         ctx.body = response.success(token);
