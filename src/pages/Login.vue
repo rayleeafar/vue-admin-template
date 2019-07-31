@@ -4,14 +4,14 @@
     <transition name="ani-fade" mode="in-out">
       <section class="form-wrapper" v-if="isShowForm">
         <div class="welcome-title">
-          <p>CMS后台管理系统</p>
+          <p>Orange Grain</p>
         </div>
         <el-form class="login-form" :model="loginForm" :rules="rules" ref="loginForm">
-          <el-form-item prop="userName">
-            <el-input type="text" v-model="loginForm.userName" placeholder="用户名"></el-input>
+          <el-form-item prop="username">
+            <el-input type="text" v-model="loginForm.username" placeholder="用户名"></el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input type="password" v-model="loginForm.password" placeholder="密码"></el-input>
+            <el-input type="password" v-model="loginForm.password" placeholder="2FA密码"></el-input>
           </el-form-item>
           <el-form-item class="submit-section">
             <el-button
@@ -75,14 +75,14 @@ export default {
   data() {
     return {
       loginForm: {
-        userName: "",
-        password: ""
+        username: "",
+        password: "",
+        otpass: ""
       },
       rules: {
-        userName: [
-          { required: true, message: "请输入用户名", trigger: "blur" }
-        ],
-        password: [{ required: true, message: "请输入密码", trigger: "blur" }]
+        username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
+        password: [{ required: true, message: "请输入密码", trigger: "blur" }],
+        otpass: [{ required: true, message: "请输入2FA密码", trigger: "blur" }]
       },
       isShowForm: false,
       btnLoading: false

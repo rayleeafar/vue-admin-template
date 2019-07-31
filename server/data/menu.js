@@ -1,11 +1,7 @@
 // 菜单表
 let menus = [
-    { id: '2', name: '用户管理', path: '/user', parentId: 0, order: 2 },
-    { id: '3', name: '用户列表', path: '/user/list', parentId: 2, order: 3 },
-    { id: '4', name: '菜单管理', path: '/menu', parentId: 0, order: 4 },
-    { id: '5', name: '菜单列表', path: '/menu/list', parentId: 4, order: 5 },
-    { id: '6', name: '一级菜单', path: '/test1', parentId: 0, order: 6 },
-    { id: '7', name: '二级菜单', path: '/test2', parentId: 6, order: 7 },
+    { id: '2', name: '套利程序管理', path: '/arbitrage', parentId: 0, order: 2 },
+    { id: '3', name: '程序进程列表', path: '/arbitrage/list', parentId: 2, order: 3 }
 ];
 
 module.exports = menus;

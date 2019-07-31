@@ -1,7 +1,7 @@
 import Login from '../pages/Login';
 import Index from '../pages/Index';
 import Hello from '../pages/Hello/Hello';
-import UserList from '../pages/User/List';
+import ArbitrageList from '../pages/Arbitrage/List';
 
 let routes = [
     // 直接访问跟地址时，跳转到登录页面，引导登录
@@ -21,12 +21,12 @@ let routes = [
         component: Index,
         children: [
             {
-                name:'userList',
-                path:'/user/list',
-                component:UserList,
+                name:'arbitrageList',
+                path:'/arbitrage/list',
+                component:ArbitrageList,
                 meta:{
                     // 面包屑数据
-                    navBar:['用户管理','用户列表']
+                    // navBar:['用户管理','用户列表']
                 }
             },
             {
