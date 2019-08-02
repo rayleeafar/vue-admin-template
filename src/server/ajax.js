@@ -1,6 +1,5 @@
 import axios from './axios.config';
 import storage from '../utils/storage';
-
 // ajax请求封装，返回一个Promise对象。
 // 如果请求返回401，自动跳转到登录页
 // 如果请求出现错误，自动在页面上展示错误消息
@@ -66,6 +65,7 @@ const ajax = function (options) {
                             center: true
                         });
                     }
+                    this.$router.reload();
                     reject(res.data.err);
                 }
             }).catch(err => {
@@ -83,10 +83,10 @@ const ajax = function (options) {
                             center: true
                         });
                     }
-                    this.$router.go(0)
-                    // this.$router.push({
-                    //     name: 'login'
-                    // });
+                    // this.$router.go(1);
+                    this.$router.push({
+                        name: 'login'
+                    });
                 } else {
                     // 其他的错误 弹出详细的错误原因
                     if (showErr) {

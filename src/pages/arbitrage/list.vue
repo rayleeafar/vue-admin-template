@@ -22,6 +22,7 @@
       </el-button>
       <el-table :data="users">
         <el-table-column prop="programID" label="程序ID" width="100"></el-table-column>
+        <el-table-column prop="symbol" label="交易对" width="100"></el-table-column>
         <el-table-column prop="deltaDiff" label="偏离值" width="120"></el-table-column>
         <el-table-column prop="leverage" label="杠杆" width="120"></el-table-column>
         <el-table-column prop="openPositionBuyA" label="A多仓使能" width="120">
@@ -36,13 +37,7 @@
             <span v-if="scope.row.openPositionSellA=='1'">可开空仓</span>
           </template>
         </el-table-column>
-        <el-table-column prop="profitRange" label="网格范围" width="180">
-          <template slot-scope="scope">
-            <span >{{ scope.row.profitRange.s }}</span>
-            <span >-</span>
-            <span >{{ scope.row.profitRange.e }}</span>
-          </template>
-        </el-table-column>
+        <el-table-column prop="profitRange" label="网格范围" width="180"></el-table-column>
         <el-table-column prop="remark" label="备注" width="180"></el-table-column>
         <el-table-column label="创建时间" width="180">
           <template slot-scope="scope">
@@ -92,8 +87,11 @@
         <el-form-item prop="id" label="DBID:" v-if="false">
           <el-input type="text" v-model="dialog.form.id" ></el-input>
         </el-form-item>
-        <el-form-item prop="programID" label="程序ID:">
-          <el-input type="text" v-model="dialog.form.programID"></el-input>
+        <el-form-item prop="programID" label="程序ID:" >
+          <el-input type="text" v-model="dialog.form.programID" :disabled="dialog.type=='add'?false:true"></el-input>
+        </el-form-item>
+        <el-form-item prop="symbol" label="交易对symbol:" >
+          <el-input type="text" v-model="dialog.form.symbol" :disabled="dialog.type=='add'?false:true"></el-input>
         </el-form-item>
         <el-form-item prop="deltaDiff" label="偏离值:">
           <el-input type="text" v-model="dialog.form.deltaDiff"></el-input>
@@ -114,12 +112,8 @@
           </el-radio-group>
         </el-form-item>
         
-        <el-form-item prop="profitRange" label="网格范围:" >
-          <div id="profitRangeWrap" display="flex">
-              <div id="div1"><el-input type="text" v-model="dialog.form.profitRange.s"></el-input></div>
-              <div id="div3">-</div>
-              <div id="div2"><el-input type="text" v-model="dialog.form.profitRange.e"></el-input></div>
-          </div>
+        <el-form-item prop="profitRange" label="网格范围:" >  
+            <el-input type="text" v-model="dialog.form.profitRange"></el-input>
         </el-form-item>
         <el-form-item prop="remark" label="备注:">
           <el-input type="text" v-model="dialog.form.remark"></el-input>
@@ -169,22 +163,21 @@ export default {
         form:{
           id:"",
           programID:"",
+          symbol:"",
           deltaDiff:"",
           leverage:"",
           openPositionBuyA:1,
           openPositionSellA:1,
-          profitRange:{
-            s:"",
-            e:""
-          },
+          profitRange:"",
           remark:""
         },
         // 表单验证规则
         formRules: {
           programID: [{ required: true, message: "请输入程序ID", trigger: "blur" }],
-          deltaDiff: [{ pattern: /-{0,1}([1-9].\d*\.{0,1}|0\.|0)\d*[0-9]{0,1}$/,required: true, message: "请输入偏离值", trigger: "blur" }],
-          leverage: [{ pattern: /[1-9]\d*.\d*|0\.\d*[1-9]\d*/,required: true, message: "请输入杠杆倍数", trigger: "blur" }],
-          profitRange: [{ required: true, message: "请输入网格范围上下限", trigger: "blur" }]
+          symbol: [{ required: true, message: "请输入程序symbol", trigger: "blur" }],
+          deltaDiff: [{ pattern: /-{0,1}0\.00\d*/,required: true, message: "请输入正确的偏离值(-0.01,0.01)", trigger: "blur" }],
+          leverage: [{ pattern: /^[0-6]{1}\.\d*|^[0-6]{1}$/,required: true, message: "请输入正确的杠杆倍数(0-7)", trigger: "blur" }],
+          profitRange: [{ required: true, message: "请输入网格范围", trigger: "blur" }]
         }
       }
     };
@@ -224,6 +217,7 @@ export default {
       this.dialog.type = "";
       this.dialog.btnLoading = false;
       this.dialog.visible = false;
+      this.getUsers();
     },
     // 提交弹层中的表单
     async submitDialogForm() {
@@ -246,6 +240,8 @@ export default {
             this.getUsers();
           } catch (err) {
             console.log(err);
+            console.log("submit form err");
+            this.getUsers();
           } finally {
             this.closeDialog();
           }

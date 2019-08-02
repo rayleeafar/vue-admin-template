@@ -80,8 +80,8 @@ export default {
         password: ""
       },
       rules: {
-        username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
-        password: [{ required: true, message: "请输入密码", trigger: "blur" }],
+        username: [{ required: true, message: "请输入用户!", trigger: "blur" }],
+        password: [{ required: true, message: "请输入密码!", trigger: "blur" }],
       },
       isShowForm: false,
       btnLoading: false
@@ -118,6 +118,9 @@ export default {
       this.$refs[formName].validate(async valid => {
         if (valid) {
           this.changeBtnLoadingState();
+          setTimeout(() => {
+              this.changeBtnLoadingState();
+            }, 3000);
           try {
             // 登录并设置token
             let token = await this.$ajax({
@@ -151,6 +154,7 @@ export default {
             }, 1000);
           } catch (err) {
             console.log(err);
+            console.log("login fail!!");
           } finally {
             this.changeBtnLoadingState();
           }
